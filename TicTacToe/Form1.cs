@@ -460,10 +460,10 @@ namespace TicTacToe
 
             for (int i = 0; i < this.weights[this.weights.Length - 1].Length; i++) //Выходной слой
             {
-                errors[this.weights.Length - 1][i] = (answer[i] - this.outputData[i]) * this.outputData[i] * (1 - this.outputData[i]); //Ошибка этого нейрона (маленькая дельта в формулах)
+                errors[this.weights.Length - 1][i] = -(answer[i] - this.outputData[i]) * this.outputData[i] * (1 - this.outputData[i]); //Ошибка этого нейрона (маленькая дельта в формулах)
                 for (int j = 0; j < this.weights[this.weights.Length - 1][i].Length; j++)
                 {
-                    this.weights[this.weights.Length - 1][i][j] += //Исправляем вес: скорость обучения * ошибка нейрона * входное значение из нейрона, связь с которым сейчас корректируем + прошлое изменение веса * на momentumRate
+                    this.weights[this.weights.Length - 1][i][j] -= //Исправляем вес: скорость обучения * ошибка нейрона * входное значение из нейрона, связь с которым сейчас корректируем + прошлое изменение веса * на momentumRate
                         this.accuracy * 
                         errors[this.weights.Length - 1][i] * 
                         this.neuronInputs[this.weights.Length - 1][i][j] + 
@@ -485,10 +485,10 @@ namespace TicTacToe
                     {
                         errors[i][j] += errors[i + 1][k] * oldWeights[i + 1][k][j]; //Ошибку каждого нейрона следующего слоя умножаем на вес входа из обрабатываемого нейрона в этот
                     }
-                    errors[i][j] *= this.neuronInputs[i + 1][0][j] * (1 - this.neuronInputs[i + 1][0][j]); //Завершаем вычисление ошибки умножив сумму ошибок следующего слоя на out(1 - out) этого нейрона
+                    errors[i][j] *= this.neuronInputs[i + 1][0][j] * (1 - this.neuronInputs[i + 1][0][j]); //Завершаем вычисление ошибки умножив сумму ошибок следующего слоя на out(1 - out)*outPrev этого нейрона
                     for (int k = 0; k < this.weights[i][j].Length; k++)
                     {
-                        this.weights[i][j][k] +=
+                        this.weights[i][j][k] -=
                             this.accuracy * 
                             errors[i][j] * 
                             this.neuronInputs[i][j][k] +
