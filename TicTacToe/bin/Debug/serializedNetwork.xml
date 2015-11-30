@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Network xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <weights>
+    <ArrayOfArrayOfFloat>
+      <ArrayOfFloat>
+        <float>1.05999637</float>
+        <float>2.0199964</float>
+        <float>-3.019998</float>
+      </ArrayOfFloat>
+    </ArrayOfArrayOfFloat>
+    <ArrayOfArrayOfFloat>
+      <ArrayOfFloat>
+        <float>0.01999997</float>
+        <float>-0.0199986584</float>
+      </ArrayOfFloat>
+    </ArrayOfArrayOfFloat>
+  </weights>
+  <neuronInputs>
+    <ArrayOfArrayOfFloat>
+      <ArrayOfFloat>
+        <float>-1</float>
+        <float>-1</float>
+        <float>1</float>
+      </ArrayOfFloat>
+    </ArrayOfArrayOfFloat>
+    <ArrayOfArrayOfFloat>
+      <ArrayOfFloat>
+        <float>-1</float>
+        <float>1</float>
+      </ArrayOfFloat>
+    </ArrayOfArrayOfFloat>
+  </neuronInputs>
+  <inputData>
+    <float>-1</float>
+    <float>-1</float>
+  </inputData>
+  <outputData>
+    <float>-1</float>
+  </outputData>
+  <accuracy>0.01</accuracy>
+</Network>
