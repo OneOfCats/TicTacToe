@@ -19,13 +19,75 @@ namespace TicTacToe
         Button[] buttons;
         Network NeuralNetwork;
         logicFunction2 function2Delegate = new logicFunction2(logicFunctions.logicOr);
+        interfaceNetworkGame ifc;
 
         public Form1()
         {
             InitializeComponent();
             buttons = new Button[9] { this.field0, this.field1, this.field2, this.field3, this.field4, this.field5, this.field6, this.field7, this.field8 };
             Game = new TicTacToe(this);
-            this.NeuralNetwork = new Network(2, 2, 2, 1);
+            this.NeuralNetwork = new Network(30, 2, 18, 9);
+            ifc = new interfaceNetworkGame(this.Game, this.NeuralNetwork);
+        }
+
+        public float[][] generateInputs()
+        {
+            float[][] inputs = new float[24][];
+            inputs[0] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[1] = new float[18] { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[2] = new float[18] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[3] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[4] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[5] = new float[18] { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[6] = new float[18] { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[7] = new float[18] { 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[8] = new float[18] { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[9] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[10] = new float[18] { 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[11] = new float[18] { 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[12] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[13] = new float[18] { 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[14] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[15] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            inputs[16] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            inputs[17] = new float[18] { 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[18] = new float[18] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[19] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 };
+            inputs[20] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 };
+            inputs[21] = new float[18] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            inputs[22] = new float[18] { 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[23] = new float[18] { 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            return inputs;
+        }
+
+        public float[][] generateOutputs()
+        {
+            float[][] outputs = new float[24][];
+            outputs[0] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[1] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[2] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[3] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[4] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[5] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[6] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            outputs[7] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+            outputs[8] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[9] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+            outputs[10] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            outputs[11] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[12] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[13] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[14] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[15] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[16] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[17] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            outputs[18] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[19] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[20] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+            outputs[21] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[22] = new float[9] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
+            outputs[23] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 1, 0 };
+            return outputs;
         }
 
         public void clearField(char check) //Очистка поля, если кто-то победил
@@ -139,6 +201,27 @@ namespace TicTacToe
             this.NeuralNetwork = (Network)mySerializer.Deserialize(myFileStream);
             myFileStream.Close();
         }
+
+        private void networkTurnButton_Click(object sender, EventArgs e)
+        {
+            int result = ifc.makeTurn();
+            if (result != -1)
+            {
+                this.buttons[result].Text = Game.currentTurn == 'X' ? "O" : "X";
+                netErrorLabel.Text = "0";
+            }
+            else
+            {
+                netErrorLabel.Text = "1";
+            }
+        }
+
+        private void teachGameButton_Click(object sender, EventArgs e)
+        {
+            float[][] inputs = generateInputs();
+            float[][] outputs = generateOutputs();
+            int[] answers = NeuralNetwork.learnArrays(inputs, outputs, 3000);
+        }
         
     }
 
@@ -239,7 +322,7 @@ namespace TicTacToe
 
         public char makeTurn(int button)
         {
-            if (button < 0 || button > 8) return 'E'; //Вернуть ошибку, если такой кнопки не существует
+            if (button < 0 || button > 8 || this.turnsLine[button] != 'N') return 'E'; //Вернуть ошибку, если такой кнопки не существует или клетка занята
             this.turnsLine = this.turnsLine.Remove(button, 1).Insert(button, this.currentTurn.ToString());
             if (this.currentTurn == 'X')
                 this.currentTurn = 'O';
@@ -512,6 +595,28 @@ namespace TicTacToe
             return true;
         }
 
+        public int[] learnArrays(float[][] inputs, float[][] answers, int iterations)
+        {
+            int[] successes = new int[3] { 0, 0, 0 };
+            for (int k = 0; k < iterations; k++)
+            {
+                for (int i = 0; i < inputs.Length; i++)
+                {
+                    if (trainBP(inputs[i], answers[i])) // Выполняем функцию тренировки
+                    {
+                        successes[0]++; //Если ответ был верным, добавляем счетчик верных ответов
+                        successes[2]++; //Счетчик верных ответов подряд
+                    }
+                    else
+                    {
+                        successes[1]++; //Счетчик неверных ответов
+                        successes[2] = 0; //Сбарос счетчика верных ответов подряд
+                    }
+                }
+            }
+            return successes;
+        }
+
         public int[] learnFunction(logicFunction2 func, string method) //2 аргумента
         {
             float[] inputs;
@@ -592,6 +697,50 @@ namespace TicTacToe
                     
             }
             return successes;
+        }
+    }
+
+    class interfaceNetworkGame
+    {
+        TicTacToe Game;
+        Network Net;
+        public float[] field; //Первые 9 - враг сети, последние 9 - сеть
+        public float[] output;
+
+        public interfaceNetworkGame(TicTacToe Game, Network Net)
+        {
+            this.Game = Game;
+            this.Net = Net;
+            field = new float[18];
+            output = new float[9];
+        }
+
+        public int makeTurn() //Выполнить ход
+        {
+            makeInputs();
+            Net.inputData = field;
+            output = Net.launchNetwork();
+            char result = Game.makeTurn(output.ToList().IndexOf(output.Max())); //Ход на клетку, на которой самое высокое значение, выданное сетью
+
+            return result == 'E' ? -1 : output.ToList().IndexOf(output.Max()); //Если сеть походила на занятую клетку, возвращаем ошибку -1. Иначе возвращаем номер клетки
+        }
+
+        public void makeInputs()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (Game.turnsLine[i] != Game.currentTurn && Game.turnsLine[i] != 'N')
+                    field[i] = 1;
+                else
+                    field[i] = 0;
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                if (Game.turnsLine[i] == Game.currentTurn)
+                    field[9 + i] = 1;
+                else
+                    field[9 + i] = 0;
+            }
         }
     }
 
