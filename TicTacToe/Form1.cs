@@ -18,7 +18,7 @@ namespace TicTacToe
         TicTacToe Game;
         Button[] buttons;
         Network NeuralNetwork;
-        logicFunction2 function2Delegate = new logicFunction2(logicFunctions.logicOr);
+        logicFunction2 function2Delegate = new logicFunction2(logicFunctions.logicXor);
         interfaceNetworkGame ifc;
 
         public Form1()
@@ -26,13 +26,17 @@ namespace TicTacToe
             InitializeComponent();
             buttons = new Button[9] { this.field0, this.field1, this.field2, this.field3, this.field4, this.field5, this.field6, this.field7, this.field8 };
             Game = new TicTacToe(this);
-            this.NeuralNetwork = new Network(30, 2, 18, 9);
+            this.NeuralNetwork = new Network(30, 2, 2, 1);
             ifc = new interfaceNetworkGame(this.Game, this.NeuralNetwork);
         }
 
         public float[][] generateInputs()
         {
-            float[][] inputs = new float[24][];
+            float[][] inputs = new float[3][];
+            inputs[0] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[1] = new float[18] { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[2] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            /*
             inputs[0] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             inputs[1] = new float[18] { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             inputs[2] = new float[18] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -57,12 +61,17 @@ namespace TicTacToe
             inputs[21] = new float[18] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 };
             inputs[22] = new float[18] { 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             inputs[23] = new float[18] { 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            */
             return inputs;
         }
 
         public float[][] generateOutputs()
         {
-            float[][] outputs = new float[24][];
+            float[][] outputs = new float[3][];
+            outputs[0] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[1] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 1, 0 };
+            outputs[2] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            /*
             outputs[0] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
             outputs[1] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
             outputs[2] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
@@ -87,6 +96,7 @@ namespace TicTacToe
             outputs[21] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
             outputs[22] = new float[9] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
             outputs[23] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 1, 0 };
+            */
             return outputs;
         }
 
@@ -164,16 +174,16 @@ namespace TicTacToe
             buttonEvent(sender);
         }
 
-        private void networkCountButton_Click(object sender, EventArgs e)
+        private void networkCountButton_Click(object sender, EventArgs e) //Нажатие на кнопку рассчёта значений вручную
         {
             if (textBox1.Text.Length != 0)
-                this.NeuralNetwork.inputData[0] = float.Parse(textBox1.Text);
+                this.NeuralNetwork.inputData[0] = NeuralNetwork.activate(float.Parse(textBox1.Text), "sigmoid");
             else
-                this.NeuralNetwork.inputData[0] = 0;
+                this.NeuralNetwork.inputData[0] = NeuralNetwork.activate(0, "sigmoid");
             if (textBox2.Text.Length != 0)
-                this.NeuralNetwork.inputData[1] = float.Parse(textBox2.Text);
+                this.NeuralNetwork.inputData[1] = NeuralNetwork.activate(float.Parse(textBox2.Text), "sigmoid");
             else
-                this.NeuralNetwork.inputData[1] = 0;
+                this.NeuralNetwork.inputData[1] = NeuralNetwork.activate(0, "sigmoid");
             float[] result = this.NeuralNetwork.launchNetwork();
             this.labelAnswer.Text = result[0].ToString();
         }
@@ -624,10 +634,12 @@ namespace TicTacToe
             int[] successes = new int[3] { 0, 0, 0 };
             if (method == "BP")
             {
-                for (int i = 0; i < 2000; i++)
+                for (int i = 0; i < 4000; i++)
                 {
-                    inputs = generateInputs(2, 0, 2);
+                    inputs = generateInputs(2, 0, 1);
                     answer = func(inputs[0], inputs[1]);
+                    inputs[0] = activate(inputs[0], "sigmoid");
+                    inputs[1] = activate(inputs[1], "sigmoid");
                     if (trainBP(inputs, answer)) // Выполняем функцию тренировки
                     {
                         successes[0]++; //Если ответ был верным, добавляем счетчик верных ответов
