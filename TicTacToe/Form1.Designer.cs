@@ -56,6 +56,10 @@
             this.teachButton = new System.Windows.Forms.Button();
             this.saveNetwork = new System.Windows.Forms.Button();
             this.loadNetwork = new System.Windows.Forms.Button();
+            this.networkTurnButton = new System.Windows.Forms.Button();
+            this.teachGameButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.netErrorLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // field0
@@ -280,7 +284,7 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(12, 486);
+            this.textBox1.Location = new System.Drawing.Point(12, 536);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(73, 20);
             this.textBox1.TabIndex = 16;
@@ -288,7 +292,7 @@
             // textBox2
             // 
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(12, 513);
+            this.textBox2.Location = new System.Drawing.Point(12, 563);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(73, 20);
             this.textBox2.TabIndex = 17;
@@ -300,7 +304,7 @@
             this.networkCountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.networkCountButton.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.networkCountButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.networkCountButton.Location = new System.Drawing.Point(12, 539);
+            this.networkCountButton.Location = new System.Drawing.Point(12, 589);
             this.networkCountButton.Name = "networkCountButton";
             this.networkCountButton.Size = new System.Drawing.Size(73, 34);
             this.networkCountButton.TabIndex = 18;
@@ -313,7 +317,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.label4.Location = new System.Drawing.Point(107, 543);
+            this.label4.Location = new System.Drawing.Point(107, 593);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 26);
             this.label4.TabIndex = 20;
@@ -324,7 +328,7 @@
             this.labelAnswer.AutoSize = true;
             this.labelAnswer.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelAnswer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.labelAnswer.Location = new System.Drawing.Point(252, 543);
+            this.labelAnswer.Location = new System.Drawing.Point(252, 593);
             this.labelAnswer.Name = "labelAnswer";
             this.labelAnswer.Size = new System.Drawing.Size(23, 26);
             this.labelAnswer.TabIndex = 19;
@@ -335,7 +339,7 @@
             this.labelFalse.AutoSize = true;
             this.labelFalse.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelFalse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.labelFalse.Location = new System.Drawing.Point(252, 513);
+            this.labelFalse.Location = new System.Drawing.Point(252, 563);
             this.labelFalse.Name = "labelFalse";
             this.labelFalse.Size = new System.Drawing.Size(23, 26);
             this.labelFalse.TabIndex = 24;
@@ -346,7 +350,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.label7.Location = new System.Drawing.Point(107, 513);
+            this.label7.Location = new System.Drawing.Point(107, 563);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(139, 26);
             this.label7.TabIndex = 23;
@@ -357,7 +361,7 @@
             this.labelTrue.AutoSize = true;
             this.labelTrue.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelTrue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.labelTrue.Location = new System.Drawing.Point(252, 486);
+            this.labelTrue.Location = new System.Drawing.Point(252, 536);
             this.labelTrue.Name = "labelTrue";
             this.labelTrue.Size = new System.Drawing.Size(23, 26);
             this.labelTrue.TabIndex = 22;
@@ -368,7 +372,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.label9.Location = new System.Drawing.Point(107, 486);
+            this.label9.Location = new System.Drawing.Point(107, 536);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(117, 26);
             this.label9.TabIndex = 21;
@@ -379,7 +383,7 @@
             this.labelTrueChain.AutoSize = true;
             this.labelTrueChain.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelTrueChain.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.labelTrueChain.Location = new System.Drawing.Point(314, 486);
+            this.labelTrueChain.Location = new System.Drawing.Point(314, 536);
             this.labelTrueChain.Name = "labelTrueChain";
             this.labelTrueChain.Size = new System.Drawing.Size(23, 26);
             this.labelTrueChain.TabIndex = 25;
@@ -392,7 +396,7 @@
             this.teachButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.teachButton.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.teachButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.teachButton.Location = new System.Drawing.Point(311, 535);
+            this.teachButton.Location = new System.Drawing.Point(311, 585);
             this.teachButton.Name = "teachButton";
             this.teachButton.Size = new System.Drawing.Size(73, 34);
             this.teachButton.TabIndex = 26;
@@ -407,7 +411,7 @@
             this.saveNetwork.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveNetwork.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.saveNetwork.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.saveNetwork.Location = new System.Drawing.Point(232, 589);
+            this.saveNetwork.Location = new System.Drawing.Point(232, 639);
             this.saveNetwork.Name = "saveNetwork";
             this.saveNetwork.Size = new System.Drawing.Size(73, 34);
             this.saveNetwork.TabIndex = 27;
@@ -422,7 +426,7 @@
             this.loadNetwork.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadNetwork.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loadNetwork.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
-            this.loadNetwork.Location = new System.Drawing.Point(311, 589);
+            this.loadNetwork.Location = new System.Drawing.Point(311, 639);
             this.loadNetwork.Name = "loadNetwork";
             this.loadNetwork.Size = new System.Drawing.Size(73, 34);
             this.loadNetwork.TabIndex = 28;
@@ -430,12 +434,68 @@
             this.loadNetwork.UseVisualStyleBackColor = false;
             this.loadNetwork.Click += new System.EventHandler(this.loadNetwork_Click);
             // 
+            // networkTurnButton
+            // 
+            this.networkTurnButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(92)))), ((int)(((byte)(107)))));
+            this.networkTurnButton.FlatAppearance.BorderSize = 0;
+            this.networkTurnButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.networkTurnButton.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.networkTurnButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
+            this.networkTurnButton.Location = new System.Drawing.Point(12, 485);
+            this.networkTurnButton.Name = "networkTurnButton";
+            this.networkTurnButton.Size = new System.Drawing.Size(73, 34);
+            this.networkTurnButton.TabIndex = 29;
+            this.networkTurnButton.Text = "Net";
+            this.networkTurnButton.UseVisualStyleBackColor = false;
+            this.networkTurnButton.Click += new System.EventHandler(this.networkTurnButton_Click);
+            // 
+            // teachGameButton
+            // 
+            this.teachGameButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(92)))), ((int)(((byte)(107)))));
+            this.teachGameButton.FlatAppearance.BorderSize = 0;
+            this.teachGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.teachGameButton.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.teachGameButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
+            this.teachGameButton.Location = new System.Drawing.Point(91, 485);
+            this.teachGameButton.Name = "teachGameButton";
+            this.teachGameButton.Size = new System.Drawing.Size(87, 34);
+            this.teachGameButton.TabIndex = 30;
+            this.teachGameButton.Text = "Teach";
+            this.teachGameButton.UseVisualStyleBackColor = false;
+            this.teachGameButton.Click += new System.EventHandler(this.teachGameButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
+            this.label5.Location = new System.Drawing.Point(187, 489);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(91, 26);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "Ошибка:";
+            // 
+            // netErrorLabel
+            // 
+            this.netErrorLabel.AutoSize = true;
+            this.netErrorLabel.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.netErrorLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(174)))), ((int)(((byte)(136)))));
+            this.netErrorLabel.Location = new System.Drawing.Point(282, 489);
+            this.netErrorLabel.Name = "netErrorLabel";
+            this.netErrorLabel.Size = new System.Drawing.Size(23, 26);
+            this.netErrorLabel.TabIndex = 32;
+            this.netErrorLabel.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(33)))), ((int)(((byte)(66)))));
-            this.ClientSize = new System.Drawing.Size(398, 635);
+            this.ClientSize = new System.Drawing.Size(398, 719);
+            this.Controls.Add(this.netErrorLabel);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.teachGameButton);
+            this.Controls.Add(this.networkTurnButton);
             this.Controls.Add(this.loadNetwork);
             this.Controls.Add(this.saveNetwork);
             this.Controls.Add(this.teachButton);
@@ -503,6 +563,10 @@
         private System.Windows.Forms.Button teachButton;
         private System.Windows.Forms.Button saveNetwork;
         private System.Windows.Forms.Button loadNetwork;
+        private System.Windows.Forms.Button networkTurnButton;
+        private System.Windows.Forms.Button teachGameButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label netErrorLabel;
     }
 }
 
