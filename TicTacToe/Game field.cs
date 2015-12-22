@@ -13,7 +13,7 @@ namespace TicTacToe
     public delegate float[] logicFunction1(float a);
     public delegate float[] logicFunction2(float a, float b);
 
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
         TicTacToe Game;
         Button[] buttons;
@@ -21,82 +21,150 @@ namespace TicTacToe
         logicFunction2 function2Delegate = new logicFunction2(logicFunctions.logicXor);
         interfaceNetworkGame ifc;
 
-        public Form1()
+        public GameForm()
         {
             InitializeComponent();
             buttons = new Button[9] { this.field0, this.field1, this.field2, this.field3, this.field4, this.field5, this.field6, this.field7, this.field8 };
             Game = new TicTacToe(this);
-            this.NeuralNetwork = new Network(30, 2, 2, 1);
+            this.NeuralNetwork = new Network(40, 2, 18, 9);
             ifc = new interfaceNetworkGame(this.Game, this.NeuralNetwork);
         }
 
         public float[][] generateInputs()
         {
-            float[][] inputs = new float[3][];
-            inputs[0] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[1] = new float[18] { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[2] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            /*
-            inputs[0] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[1] = new float[18] { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[2] = new float[18] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[3] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[4] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[5] = new float[18] { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[6] = new float[18] { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[7] = new float[18] { 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[8] = new float[18] { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[9] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[10] = new float[18] { 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[11] = new float[18] { 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[12] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[13] = new float[18] { 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[14] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[15] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 };
-            inputs[16] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            inputs[17] = new float[18] { 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[18] = new float[18] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[19] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 };
-            inputs[20] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 };
-            inputs[21] = new float[18] { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            inputs[22] = new float[18] { 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            inputs[23] = new float[18] { 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            */
+            float[][] inputs = new float[72][];
+            inputs[0] = new float[18] { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[1] = new float[18] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[2] = new float[18] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[3] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+            inputs[4] = new float[18] { 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            inputs[5] = new float[18] { 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            inputs[6] = new float[18] { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            inputs[7] = new float[18] { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            inputs[8] = new float[18] { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            inputs[9] = new float[18] { 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[10] = new float[18] { 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            inputs[11] = new float[18] { 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+            inputs[12] = new float[18] { 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0 };
+            inputs[13] = new float[18] { 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0 };
+            inputs[14] = new float[18] { 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 };
+            inputs[15] = new float[18] { 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 };
+            inputs[16] = new float[18] { 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+            for (int i = 17; i < 34; i++)
+            {
+                inputs[i] = reflectInputs(inputs[i - 17]);
+            }
+            inputs[34] = new float[18] { 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[35] = new float[18] { 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[36] = new float[18] { 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[37] = new float[18] { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[38] = new float[18] { 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[39] = new float[18] { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[40] = new float[18] { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[41] = new float[18] { 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            for (int i = 42; i < 47; i++)
+            {
+                inputs[i] = reflectInputs(inputs[i - 8]);
+            }
+            inputs[47] = new float[18] { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            inputs[48] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0 };
+            inputs[49] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0 };
+            inputs[50] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0 };
+            inputs[51] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0 };
+            inputs[52] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 };
+            inputs[53] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
+            inputs[54] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 };
+            inputs[55] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 };
+            inputs[56] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 };
+            inputs[57] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 };
+            inputs[58] = new float[18] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0 };
+            for (int i = 59; i < 72; i++)
+            {
+                inputs[i] = reflectInputs(inputs[i - 12]);
+            }
             return inputs;
+        }
+
+        public float[] reflectInputs(float[] inputs)
+        {
+            float[] reflected = new float[18];
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                switch ((i + 1) % 3)
+                {
+                    case 1:
+                        {
+                            reflected[i + 2] = inputs[i];
+                            break;
+                        }
+                    case 2:
+                        {
+                            reflected[i] = inputs[i];
+                            break;
+                        }
+                    case 0:
+                        {
+                            reflected[i - 2] = inputs[i];
+                            break;
+                        }
+                }
+            }
+            return reflected;
         }
 
         public float[][] generateOutputs()
         {
-            float[][] outputs = new float[3][];
-            outputs[0] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[1] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 1, 0 };
-            outputs[2] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
-            /*
-            outputs[0] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[1] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            float[][] outputs = new float[72][];
+            outputs[0] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[1] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
             outputs[2] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[3] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[4] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[5] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[6] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
-            outputs[7] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-            outputs[8] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
-            outputs[9] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-            outputs[10] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
-            outputs[11] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
-            outputs[12] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[13] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[14] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[15] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
-            outputs[16] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
-            outputs[17] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
-            outputs[18] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            outputs[19] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
-            outputs[20] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
-            outputs[21] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
-            outputs[22] = new float[9] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
-            outputs[23] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 1, 0 };
-            */
+            outputs[3] = new float[9] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
+            outputs[4] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[5] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 1, 0 };
+            outputs[6] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+            outputs[7] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[8] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[9] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            outputs[10] = new float[9] { 0, 0, 0, 0, 0, 1, 0, 0, 0 };
+            outputs[11] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+            outputs[12] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[13] = new float[9] { 0, 1, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[14] = new float[9] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
+            outputs[15] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[16] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            for (int i = 17; i < 34; i++)
+            {
+                outputs[i] = reflectInputs(outputs[i - 17]);
+            }
+            outputs[34] = new float[9] { 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+            outputs[35] = new float[9] { 1, 0, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[36] = new float[9] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
+            outputs[37] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[38] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            outputs[39] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            outputs[40] = new float[9] { 0, 0, 0, 0, 0, 1, 0, 0, 0 };
+            outputs[41] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            for (int i = 42; i < 47; i++)
+            {
+                outputs[i] = reflectInputs(outputs[i - 8]);
+            }
+            outputs[47] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[48] = new float[9] { 0, 0, 0, 1, 0, 0, 0, 0, 0 };
+            outputs[49] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[50] = new float[9] { 0, 1, 0, 0, 0, 0, 0, 0, 0 };
+            outputs[51] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[52] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 1, 0 };
+            outputs[53] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            outputs[54] = new float[9] { 0, 0, 0, 0, 0, 1, 0, 0, 0 };
+            outputs[55] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[56] = new float[9] { 0, 0, 0, 0, 1, 0, 0, 0, 0 };
+            outputs[57] = new float[9] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+            outputs[58] = new float[9] { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+            for (int i = 59; i < 72; i++)
+            {
+                outputs[i] = reflectInputs(outputs[i - 12]);
+            }
             return outputs;
         }
 
@@ -206,23 +274,37 @@ namespace TicTacToe
 
         private void loadNetwork_Click(object sender, EventArgs e)
         {
-            System.Xml.Serialization.XmlSerializer mySerializer = new System.Xml.Serialization.XmlSerializer(typeof(Network));
-            System.IO.FileStream myFileStream = new System.IO.FileStream("serializedNetwork.xml", System.IO.FileMode.Open);
-            this.NeuralNetwork = (Network)mySerializer.Deserialize(myFileStream);
-            myFileStream.Close();
+            try
+            {
+                System.Xml.Serialization.XmlSerializer mySerializer = new System.Xml.Serialization.XmlSerializer(typeof(Network));
+                System.IO.FileStream myFileStream = new System.IO.FileStream("serializedNetwork.xml", System.IO.FileMode.Open);
+                Network newNet = (Network)mySerializer.Deserialize(myFileStream);
+                this.NeuralNetwork = newNet;
+                myFileStream.Close();
+            }
+            catch
+            {
+            }
         }
 
         private void networkTurnButton_Click(object sender, EventArgs e)
         {
-            int result = ifc.makeTurn();
-            if (result != -1)
+            char result = ifc.makeTurn();
+            if (result != 'X' && result != 'O' && result != 'N')
             {
-                this.buttons[result].Text = Game.currentTurn == 'X' ? "O" : "X";
-                netErrorLabel.Text = "0";
+                if (result != 'E')
+                {
+                    this.buttons[Int32.Parse(result.ToString())].Text = Game.currentTurn == 'X' ? "O" : "X";
+                    label5.Text = "";
+                }
+                else
+                {
+                    label5.Text = "Error";
+                }
             }
             else
             {
-                netErrorLabel.Text = "1";
+                clearField(result);
             }
         }
 
@@ -230,7 +312,7 @@ namespace TicTacToe
         {
             float[][] inputs = generateInputs();
             float[][] outputs = generateOutputs();
-            int[] answers = NeuralNetwork.learnArrays(inputs, outputs, 3000);
+            int[] answers = NeuralNetwork.learnArrays(inputs, outputs, 2000);
         }
         
     }
@@ -341,7 +423,7 @@ namespace TicTacToe
             char isWin = this.checkWin();
             if (isWin != 'T')
                 this.win(isWin);
-            return isWin;
+            return isWin; //'X' - победа крестиков, 'O' - победа ноликов, 'N' - ничья, 'T' - игра продолжается
         }
     }
 
@@ -712,6 +794,9 @@ namespace TicTacToe
         }
     }
 
+    /// <summary>
+    /// Класс-интерфейс, связывающий игру и сеть
+    /// </summary>
     class interfaceNetworkGame
     {
         TicTacToe Game;
@@ -727,14 +812,17 @@ namespace TicTacToe
             output = new float[9];
         }
 
-        public int makeTurn() //Выполнить ход
+        public char makeTurn() //Выполнить ход
         {
             makeInputs();
             Net.inputData = field;
             output = Net.launchNetwork();
             char result = Game.makeTurn(output.ToList().IndexOf(output.Max())); //Ход на клетку, на которой самое высокое значение, выданное сетью
 
-            return result == 'E' ? -1 : output.ToList().IndexOf(output.Max()); //Если сеть походила на занятую клетку, возвращаем ошибку -1. Иначе возвращаем номер клетки
+            if (result == 'T') //Если игра продолжается, возвращаем номер клетки, куда ходим
+                return output.ToList().IndexOf(output.Max()).ToString()[0];
+            else
+                return result; //Иначе возвращаем победителя
         }
 
         public void makeInputs()
@@ -756,6 +844,9 @@ namespace TicTacToe
         }
     }
 
+    /// <summary>
+    /// Класс с набором методов, представляющих простые логические функции для тестирования обучения нейронной сети
+    /// </summary>
     class logicFunctions
     {
         static public float[] logicNot(float a)
